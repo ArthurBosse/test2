@@ -1,0 +1,530 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modernisation de la modale et du formulaire</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #a855f7 100%);
+        }
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .modal {
+            transition: all 0.3s ease;
+        }
+        .modal-overlay {
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(4px);
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-50">
+    <!-- Header -->
+    <header class="gradient-bg text-white shadow-lg">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-file-medical text-3xl"></i>
+                    <h1 class="text-2xl font-bold">ArrêtMaladie<span class="text-pink-300">Express</span></h1>
+                </div>
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="#how" class="hover:text-pink-200 transition">Comment ça marche</a>
+                    <a href="#testimonials" class="hover:text-pink-200 transition">Témoignages</a>
+                    <a href="#faq" class="hover:text-pink-200 transition">FAQ</a>
+                </div>
+                <button class="md:hidden text-2xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="gradient-bg text-white py-16">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-10 md:mb-0">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6">Obtenez votre arrêt maladie en <span class="text-pink-300">quelques minutes</span></h2>
+                <p class="text-xl mb-8">Service médical en ligne rapide, sécurisé et reconnu</p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <button id="orderBtn" class="bg-white text-purple-600 hover:bg-purple-100 font-bold py-4 px-8 rounded-full text-lg pulse-animation transition">
+                        Commander maintenant - 9,99€
+                    </button>
+                    <button class="border-2 border-white text-white hover:bg-white hover:text-purple-600 font-bold py-4 px-8 rounded-full text-lg transition">
+                        <i class="fas fa-play mr-2"></i> Voir la démo
+                    </button>
+                </div>
+                <div class="mt-8 flex items-center">
+                    <div class="flex -space-x-2">
+                        <img class="w-10 h-10 rounded-full border-2 border-white" src="https://randomuser.me/api/portraits/women/1.jpg" alt="">
+                        <img class="w-10 h-10 rounded-full border-2 border-white" src="https://randomuser.me/api/portraits/men/1.jpg" alt="">
+                        <img class="w-10 h-10 rounded-full border-2 border-white" src="https://randomuser.me/api/portraits/women/2.jpg" alt="">
+                    </div>
+                    <div class="ml-4">
+                        <p class="font-semibold">+1,5 million d'arrêts délivrés</p>
+                        <div class="flex items-center">
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span class="ml-2">4.9/5 (12,458 avis)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="md:w-1/2 flex justify-center">
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Docteur" class="rounded-xl shadow-2xl w-full max-w-md">
+                    <div class="absolute -bottom-6 -right-6 bg-white p-4 rounded-xl shadow-lg">
+                        <div class="flex items-center">
+                            <div class="bg-green-100 p-3 rounded-full">
+                                <i class="fas fa-check text-green-600 text-xl"></i>
+                            </div>
+                            <div class="ml-3">
+                                <p class="font-bold text-gray-800">Arrêt valide</p>
+                                <p class="text-sm text-gray-600">Certifié par des médecins</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Press Section -->
+    <section class="py-12 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <h3 class="text-center text-gray-500 mb-8">Ils parlent de nous</h3>
+            <div class="flex flex-wrap justify-center items-center gap-8 md:gap-16">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/TF1_logo_2013.png/800px-TF1_logo_2013.png" alt="TF1" class="h-12 opacity-70 hover:opacity-100 transition">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Le_Monde.svg/1280px-Le_Monde.svg.png" alt="Le Monde" class="h-8 opacity-70 hover:opacity-100 transition">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Le_Figaro_logo.svg/1280px-Le_Figaro_logo.svg.png" alt="Le Figaro" class="h-8 opacity-70 hover:opacity-100 transition">
+                <img src="https://upload.wikimedia.org/wikipedia/fr/thumb/8/8d/France_t%C3%A9l%C3%A9visions_2018.svg/1280px-France_t%C3%A9l%C3%A9visions_2018.svg.png" alt="France TV" class="h-8 opacity-70 hover:opacity-100 transition">
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how" class="py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">Comment obtenir votre arrêt maladie en 3 étapes</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition">
+                    <div class="bg-purple-100 w-14 h-14 rounded-full flex items-center justify-center mb-4">
+                        <span class="text-purple-600 font-bold text-xl">1</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Remplissez le formulaire</h3>
+                    <p class="text-gray-600">Répondez à quelques questions simples sur votre état de santé et vos informations personnelles.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition">
+                    <div class="bg-purple-100 w-14 h-14 rounded-full flex items-center justify-center mb-4">
+                        <span class="text-purple-600 font-bold text-xl">2</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Paiement sécurisé</h3>
+                    <p class="text-gray-600">Effectuez le paiement de 9,99€ par carte bancaire ou PayPal de manière totalement sécurisée.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition">
+                    <div class="bg-purple-100 w-14 h-14 rounded-full flex items-center justify-center mb-4">
+                        <span class="text-purple-600 font-bold text-xl">3</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Recevez votre arrêt</h3>
+                    <p class="text-gray-600">Téléchargez immédiatement votre arrêt maladie au format PDF, prêt à être imprimé.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials" class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">Ce que nos clients disent</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded-xl shadow">
+                    <div class="flex items-center mb-4">
+                        <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Client" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-bold">Marie D.</h4>
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">"Service incroyablement rapide ! J'ai eu mon arrêt en moins de 10 minutes alors que j'étais vraiment malade. Merci !"</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow">
+                    <div class="flex items-center mb-4">
+                        <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Client" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-bold">Thomas L.</h4>
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">"Mon employeur a accepté l'arrêt sans problème. Très professionnel et conforme à la réglementation."</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow">
+                    <div class="flex items-center mb-4">
+                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Client" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-bold">Sophie R.</h4>
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">"Parfait pour les petits bobos quand on n'a pas le temps d'aller chez le médecin. Je recommande !"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 gradient-bg text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-6">Prêt à obtenir votre arrêt maladie ?</h2>
+            <p class="text-xl mb-8">Simple, rapide et reconnu par les employeurs</p>
+            <button id="orderBtn2" class="bg-white text-purple-600 hover:bg-purple-100 font-bold py-4 px-12 rounded-full text-lg transition">
+                Commander maintenant - 9,99€
+            </button>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="py-16">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <h2 class="text-3xl font-bold text-center mb-12">Questions fréquentes</h2>
+            <div class="space-y-4">
+                <div class="border border-gray-200 rounded-lg overflow-hidden">
+                    <button class="w-full flex justify-between items-center p-4 bg-gray-50 hover:bg-gray-100 transition">
+                        <span class="font-semibold text-left">Est-ce que ces arrêts sont légaux ?</span>
+                        <i class="fas fa-chevron-down transition-transform"></i>
+                    </button>
+                    <div class="p-4 hidden">
+                        <p class="text-gray-600">Nos arrêts maladie sont établis par des médecins diplômés d'État conformément à la législation française en vigueur. Ils sont parfaitement valables auprès de votre employeur et des organismes sociaux.</p>
+                    </div>
+                </div>
+                <div class="border border-gray-200 rounded-lg overflow-hidden">
+                    <button class="w-full flex justify-between items-center p-4 bg-gray-50 hover:bg-gray-100 transition">
+                        <span class="font-semibold text-left">Combien de temps pour recevoir mon arrêt ?</span>
+                        <i class="fas fa-chevron-down transition-transform"></i>
+                    </button>
+                    <div class="p-4 hidden">
+                        <p class="text-gray-600">Vous recevez votre arrêt maladie immédiatement après validation de votre commande et du paiement, généralement en moins de 5 minutes.</p>
+                    </div>
+                </div>
+                <div class="border border-gray-200 rounded-lg overflow-hidden">
+                    <button class="w-full flex justify-between items-center p-4 bg-gray-50 hover:bg-gray-100 transition">
+                        <span class="font-semibold text-left">Puis-je choisir la durée de mon arrêt ?</span>
+                        <i class="fas fa-chevron-down transition-transform"></i>
+                    </button>
+                    <div class="p-4 hidden">
+                        <p class="text-gray-600">Oui, vous pouvez choisir librement la durée de votre arrêt maladie entre 1 et 14 jours en fonction de vos besoins.</p>
+                    </div>
+                </div>
+                <div class="border border-gray-200 rounded-lg overflow-hidden">
+                    <button class="w-full flex justify-between items-center p-4 bg-gray-50 hover:bg-gray-100 transition">
+                        <span class="font-semibold text-left">Que se passe-t-il si mon employeur conteste l'arrêt ?</span>
+                        <i class="fas fa-chevron-down transition-transform"></i>
+                    </button>
+                    <div class="p-4 hidden">
+                        <p class="text-gray-600">Nos arrêts sont parfaitement conformes et nous fournissons un support juridique en cas de contestation. Dans les 5 dernières années, nous n'avons eu que 0.02% de cas contestés.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">ArrêtMaladieExpress</h3>
+                    <p class="text-gray-400">Service médical en ligne rapide et sécurisé pour vos arrêts maladie.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Liens utiles</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Comment ça marche</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">FAQ</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Mentions légales</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">CGV</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Contact</h4>
+                    <ul class="space-y-2">
+                        <li class="flex items-center text-gray-400"><i class="fas fa-envelope mr-2"></i> contact@arretmaladieexpress.fr</li>
+                        <li class="flex items-center text-gray-400"><i class="fas fa-phone mr-2"></i> 01 23 45 67 89</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Paiement sécurisé</h4>
+                    <div class="flex space-x-2">
+                        <i class="fab fa-cc-visa text-3xl text-gray-400"></i>
+                        <i class="fab fa-cc-mastercard text-3xl text-gray-400"></i>
+                        <i class="fab fa-cc-paypal text-3xl text-gray-400"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>© 2023 ArrêtMaladieExpress. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Order Modal -->
+    <div id="orderModal" class="fixed inset-0 z-50 flex items-center justify-center hidden modal-overlay">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto modal">
+            <div class="border-b p-6 flex justify-between items-center">
+                <h2 class="text-2xl font-semibold text-gray-800">Demande d'arrêt maladie</h2>
+                <button id="closeModal" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+            </div>
+
+            <form id="orderForm" class="p-6 space-y-6">
+                <!-- Maladie -->
+                <div class="space-y-2">
+                    <label class="block text-sm font-medium text-gray-700">
+                        Maladie présumée
+                    </label>
+                    <select class="w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                        <option value="">Sélectionnez une option</option>
+                        <option value="rhume">Rhume / Grippe</option>
+                        <option value="gastro">Gastro-entérite</option>
+                        <option value="corona">Symptôme Corona</option>
+                        <option value="stress">Stress</option>
+                        <option value="migraine">Migraine</option>
+                        <option value="dos">Mal de dos</option>
+                        <option value="menstrues">Douleurs menstruelles</option>
+                        <option value="cystite">Cystite</option>
+                    </select>
+                </div>
+
+                <!-- Date Range -->
+                <div class="space-y-2">
+                    <label class="block text-sm font-medium text-gray-700">
+                        Période d'arrêt
+                    </label>
+                    <div class="relative">
+                        <input
+                            id="dateRange"
+                            type="text"
+                            placeholder="Sélectionnez les dates"
+                            class="w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 pl-10"
+                        />
+                        <i class="fas fa-calendar absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                    </div>
+                </div>
+
+                <!-- Personal Information -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="space-y-2">
+                        <label class="block text-sm font-medium text-gray-700">Nom</label>
+                        <div class="relative">
+                            <input
+                                type="text"
+                                class="w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 pl-10"
+                            />
+                            <i class="fas fa-user absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <label class="block text-sm font-medium text-gray-700">Prénom</label>
+                        <div class="relative">
+                            <input
+                                type="text"
+                                class="w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 pl-10"
+                            />
+                            <i class="fas fa-user absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Address -->
+                <div class="space-y-2">
+                    <label class="block text-sm font-medium text-gray-700">Adresse</label>
+                    <div class="relative">
+                        <input
+                            type="text"
+                            class="w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 pl-10"
+                        />
+                        <i class="fas fa-map-marker-alt absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-3 gap-4">
+                    <div class="space-y-2">
+                        <label class="block text-sm font-medium text-gray-700">Code postal</label>
+                        <input
+                            type="text"
+                            class="w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                        />
+                    </div>
+                    <div class="col-span-2 space-y-2">
+                        <label class="block text-sm font-medium text-gray-700">Ville</label>
+                        <input
+                            type="text"
+                            class="w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                        />
+                    </div>
+                </div>
+
+                <!-- Social Security & Birth Date -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="space-y-2">
+                        <label class="block text-sm font-medium text-gray-700">
+                            Numéro de sécurité sociale
+                        </label>
+                        <div class="relative">
+                            <input
+                                type="text"
+                                class="w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 pl-10"
+                                placeholder="1 85 06 75 115 036 22"
+                            />
+                            <i class="fas fa-heartbeat absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <label class="block text-sm font-medium text-gray-700">
+                            Date de naissance
+                        </label>
+                        <input
+                            type="date"
+                            class="w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                        />
+                    </div>
+                </div>
+
+                <!-- Employment Status -->
+                <div class="space-y-2">
+                    <label class="block text-sm font-medium text-gray-700">
+                        Situation professionnelle
+                    </label>
+                    <div class="space-y-2">
+                        <label class="flex items-center space-x-3 p-3 border rounded-lg hover:bg-gray-50 cursor-pointer">
+                            <input
+                                type="radio"
+                                name="employment"
+                                value="salarie"
+                                class="h-5 w-5 text-indigo-600"
+                                checked
+                            />
+                            <span class="flex items-center">
+                                <i class="fas fa-building mr-2 text-gray-400"></i>
+                                Salarié
+                            </span>
+                        </label>
+                        <label class="flex items-center space-x-3 p-3 border rounded-lg hover:bg-gray-50 cursor-pointer">
+                            <input
+                                type="radio"
+                                name="employment"
+                                value="sans-emploi"
+                                class="h-5 w-5 text-indigo-600"
+                            />
+                            <span class="flex items-center">
+                                <i class="fas fa-user mr-2 text-gray-400"></i>
+                                Sans emploi
+                            </span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <button
+                    type="submit"
+                    class="w-full bg-indigo-600 text-white py-3 px-6 rounded-lg hover:bg-indigo-700 transition flex items-center justify-center space-x-2"
+                >
+                    <span>Valider la commande</span>
+                    <span class="font-semibold">9,99€</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Toggle FAQ items
+        document.querySelectorAll('#faq button').forEach(button => {
+            button.addEventListener('click', () => {
+                const content = button.nextElementSibling;
+                const icon = button.querySelector('i');
+                
+                content.classList.toggle('hidden');
+                icon.classList.toggle('rotate-180');
+            });
+        });
+
+        // Modal handling
+        const orderBtn = document.getElementById('orderBtn');
+        const orderBtn2 = document.getElementById('orderBtn2');
+        const closeModal = document.getElementById('closeModal');
+        const orderModal = document.getElementById('orderModal');
+
+        [orderBtn, orderBtn2].forEach(btn => {
+            btn.addEventListener('click', () => {
+                orderModal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        closeModal.addEventListener('click', () => {
+            orderModal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        });
+
+        // Initialize Flatpickr
+        flatpickr("#dateRange", {
+            mode: "range",
+            minDate: "today",
+            dateFormat: "Y-m-d",
+            locale: "fr"
+        });
+
+        // Form submission
+        const orderForm = document.getElementById('orderForm');
+        orderForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Commande vali
+dée ! Votre arrêt maladie est en cours de préparation.');
+            orderModal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        });
+
+        // Close modal when clicking outside
+        orderModal.addEventListener('click', (e) => {
+            if (e.target === orderModal) {
+                orderModal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }
+        });
+    </script>
+</body>
+</html>
