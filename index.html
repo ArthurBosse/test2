@@ -30,6 +30,16 @@
             background-color: rgba(0, 0, 0, 0.7);
             backdrop-filter: blur(4px);
         }
+
+               .content-full {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+        
+        .content-full.expanded {
+            max-height: 2000px; /* Valeur suffisamment grande pour contenir tout le texte */
+        }
     </style>
 </head>
 <body class="font-sans bg-gray-50">
